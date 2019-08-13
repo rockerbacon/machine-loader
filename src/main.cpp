@@ -8,6 +8,9 @@
 
 using namespace std;
 
+chrono::milliseconds active_time(800);
+chrono::milliseconds inactive_time = chrono::milliseconds(1000) - active_time;
+
 size_t gigabytes_as_bytes(size_t value) {
 	return value*1024*1024*1024;
 }
@@ -27,11 +30,14 @@ int main (void) {
 	int8_t a, b;
 	size_t index;
 	while (true) {
-		index = pick_index(random_engine);
-		a = generate_value(random_engine);
-		b = generate_value(random_engine);
-		vector_to_simulate_usage[index] = a*b;
-		//this_thread::sleep_for(chrono::microseconds(5));
+		auto begin = chrono::high_resolution_clock::now();
+		while (chrono::high_resolution_clock::now() - begin < active_time) {
+			index = pick_index(random_engine);
+			a = generate_value(random_engine);
+			b = generate_value(random_engine);
+			vector_to_simulate_usage[index] = a*b;
+		}
+		this_thread::sleep_for(inactive_time);
 	}
 	
 	delete [] vector_to_simulate_usage;
