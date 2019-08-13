@@ -1,2 +1,2 @@
-# machine-loader
-Simple application for generating memory and CPU usage with the purpose of testing environments that should share multiple applications
+# Machine Loader
+Simple application for utilizing memory and CPU with the purpose of testing environments that should share multiple applications
