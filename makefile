@@ -38,7 +38,7 @@ $(TEST_BUILD_DIR)/%: $(TESTS_DIR)/%.cpp $(OBJS) | $(TEST_BUILD_DIR)
 tests: $(TESTS)
 
 $(RELEASE_BUILD_DIR)/%: $(RELEASE_SRC_DIR)/%.cpp $(OBJS) | $(RELEASE_BUILD_DIR)
-	$(CXX) $^ -o $(RELEASE_BUILD_DIR)/$* $(CXXFLAGS)
+	$(CXX) -static $^ -o $(RELEASE_BUILD_DIR)/$* $(CXXFLAGS)
 
 $(TEST_BUILD_DIR):
 	mkdir -p $@
